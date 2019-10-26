@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Security {
 
+    public Integer id;
     public Integer userId;
     public Integer accessToken;
     public Date expiryTimestamp;

@@ -9,11 +9,10 @@ CREATE TABLE app_user (
 )
 
 CREATE TABLE security (
-
-  user_id INTEGER PRIMARY KEY,
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER,
   access_token INTEGER,
   expiry_timestamp TIMESTAMP
-
 )
 
 CREATE TABLE  uploaded_file (

@@ -41,14 +41,16 @@ public class CredentialsController {
 
         // insert into security table now.
         Security sec = new Security();
+        sec.id = Randomizer.generateInt();
         sec.userId = loginUser.id;
         sec.accessToken = Randomizer.generateInt();
         sec.expiryTimestamp = new Date();
 
-        int resultResponse = entityManager.createNativeQuery("INSERT INTO security (user_id, access_token, expiry_timestamp) VALUES (?, ?, ?)")
-                .setParameter(1, sec.userId)
-                .setParameter(2, sec.accessToken)
-                .setParameter(3, sec.expiryTimestamp)
+        int resultResponse = entityManager.createNativeQuery("INSERT INTO security (id, user_id, access_token, expiry_timestamp) VALUES (?, ?, ?, ?)")
+                .setParameter(1, sec.id)
+                .setParameter(2, sec.userId)
+                .setParameter(3, sec.accessToken)
+                .setParameter(4, sec.expiryTimestamp)
                 .executeUpdate();
         System.out.println(" insert security db response " + resultResponse);
 
