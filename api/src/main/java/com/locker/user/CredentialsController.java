@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @RestController
-@RequestMapping("/secured/credentials")
+@RequestMapping("/public/credentials")
 public class CredentialsController {
 
     @Autowired
@@ -54,11 +55,10 @@ public class CredentialsController {
 
     }
 
-
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     @Transactional
-    public ResponseEntity<Security> doLogout() {
-        return null;
+    public String doLogout() {
+        return "nothing here go back";
     }
 
 }
