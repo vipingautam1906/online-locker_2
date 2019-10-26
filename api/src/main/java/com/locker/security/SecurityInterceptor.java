@@ -32,7 +32,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
             String accessToken = request.getHeader("AccessToken");
 
             if (accessToken == null || accessToken.isEmpty())
-                throw new RuntimeException("Access token is missing");
+                throw new RuntimeException("AccessToken header is missing");
 
             /* fetch from db that actual object.*/
 

@@ -57,7 +57,6 @@ public class CredentialsController {
     }
 
     @GetMapping("/logout")
-    @Transactional
     public String doLogout() {
         return "nothing here go back";
     }
