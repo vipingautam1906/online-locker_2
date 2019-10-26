@@ -1,0 +1,70 @@
+Practice Component
+
+<div class="ui-g">
+    <div class="ui-g-3"></div>
+    <div class="ui-g-6">
+
+        <card>
+            <card-summary>
+                <card-summary-header>
+                    <div class="ui-g">
+                        <div class="ui-g-9">
+                            <span>Competition</span>
+                        </div>
+                        <div class="ui-g-3">
+                            <button pButton type="button"
+                                    class="ui-button-raised ui-button-rounded ui-button-success"
+                                    icon="pi pi-plus"
+                                    (click)="turnCard()"
+                            ></button>
+                        </div>
+                    </div>
+
+                </card-summary-header>
+
+                <card-summary-body>
+                    This is Competition Name
+                </card-summary-body>
+
+                <card-summary-footer>
+                    <h1>Ultimately footer</h1>
+                </card-summary-footer>
+
+            </card-summary>
+
+            <card-description>
+                <card-description-header>
+                    <div class="ui-g">
+                        <div class="ui-g-9">
+                            <span>Competition Expanded</span>
+                        </div>
+                        <div class="ui-g-3">
+                            <button pButton type="button"
+                                    class="ui-button-raised ui-button-rounded ui-button-success"
+                                    icon="pi pi-times"
+                                    (click)="turnCard()"
+                            ></button>
+                        </div>
+                    </div>
+
+                </card-description-header>
+
+                <card-description-body>
+                    <input pInputText
+                           type="text"
+                           [placeholder]="'Enter Competition Name'" />
+                </card-description-body>
+
+                <card-description-footer>
+                    <h2>this again</h2>
+                </card-description-footer>
+
+            </card-description>
+        </card>
+
+    </div>
+    <div class="ui-g-3"></div>
+</div>
+
+
+<button pButton class="ui-button-secondary" label="Login" (click)="go('login')"></button>

@@ -1,0 +1,37 @@
+<div class="ui-g">
+    <div class="ui-g-3"></div>
+    <div class="ui-g-6">
+
+        <form [formGroup]="loginForm" *ngIf="loginForm">
+
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <H4>Login To Spark</H4>
+                </div>
+                <div class="ui-g-12">
+                    <input pInputText
+                           type="text"
+                           placeholder="Enter Emailddd"
+                           formControlName="email"/>
+                </div>
+                <div class="ui-g-12">
+                    <input pPassword
+                           type="password"
+                           placeholder="Enter Password"
+                           formControlName="password"/>
+                </div>
+                <div class="ui-g-12">
+                    <button pButton
+                            label="Login"
+                            (click)="doLogin()">
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+    <div class="ui-g-3"></div>
+</div>
+
+<button pButton class="ui-button-secondary" label="Practice" (click)="go('practice')"></button>

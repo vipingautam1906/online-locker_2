@@ -1,0 +1,12 @@
+<div class="ui-g">
+    <div class="ui-g-offset-10">
+        <button pButton label="Create User" (click)="navigateToCreate()"></button>
+    </div>
+    <div class="ui-g-12" *ngFor="let user of users; let idx = index">
+        <div class="ui-g user-list-item" (click)="openUser(user)">
+            <div class="ui-g-1">{{ idx }}</div>
+            <div class="ui-g-3">{{ user.email }}</div>
+            <div class="ui-g-4">{{ user.fullName }}</div>
+        </div>
+    </div>
+</div>

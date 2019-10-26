@@ -1,0 +1,8 @@
+<div class="card-container">
+    <div *ngIf="!turnedState" [@slideInOut]>
+        <ng-content select="card-summary"></ng-content>
+    </div>
+    <div *ngIf="turnedState" [@slideInOut]>
+        <ng-content select="card-description"></ng-content>
+    </div>
+</div>
