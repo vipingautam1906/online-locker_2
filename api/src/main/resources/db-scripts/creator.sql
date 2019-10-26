@@ -11,7 +11,7 @@ CREATE TABLE app_user (
 CREATE TABLE security (
 
   user_id INTEGER PRIMARY KEY,
-  access_token INTEGER PRIMARY KEY,
+  access_token INTEGER,
   expiry_timestamp TIMESTAMP
 
 )
