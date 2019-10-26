@@ -1,4 +1,4 @@
-package com.locker.user;
+package com.locker.util;
 
 import java.util.Random;
 

@@ -1,6 +1,7 @@
-package com.locker.user;
+package com.locker.security;
 
-import com.locker.user.entities.Security;
+import com.locker.security.entity.Security;
+import com.locker.util.Randomizer;
 import com.locker.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

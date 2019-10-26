@@ -1,6 +1,4 @@
-package com.locker.user;
-
-import com.locker.user.entities.Security;
+package com.locker.security.entity;
 
 public class CurrentRequestUser {
 

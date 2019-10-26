@@ -1,4 +1,4 @@
-package com.locker.user.entities;
+package com.locker.security.entity;
 
 import java.util.Date;
 

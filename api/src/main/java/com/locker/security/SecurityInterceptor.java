@@ -1,7 +1,7 @@
 package com.locker.security;
 
-import com.locker.user.CurrentRequestUser;
-import com.locker.user.entities.Security;
+import com.locker.security.entity.CurrentRequestUser;
+import com.locker.security.entity.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
