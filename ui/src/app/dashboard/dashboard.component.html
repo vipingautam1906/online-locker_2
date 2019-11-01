@@ -1,0 +1,18 @@
+<div>a div to upload a
+
+  <input type="file" (change)="fileEvent($event)">
+
+</div>
+
+
+<div class="ui-g">
+    <div class="ui-g-12" *ngFor="let uf of uploadedFiles; let idx = index">
+      <div class="ui-g user-list-item">
+          <div class="ui-g-1">{{ idx }}</div>
+          <div class="ui-g-3">{{ uf.fileName }}</div>
+          <div class="ui-g-4">{{ uf.relativePath }}</div>
+
+          <div class="ui-g-1" style="color: green" (click)="downloadFile(uf.id)">Download</div>
+      </div>
+  </div>
+</div>

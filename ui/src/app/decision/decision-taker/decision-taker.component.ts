@@ -50,7 +50,7 @@ export class DecisionTakerComponent {
         this.shouldBehaveAsAuthenticated = false;
       } else {
         if (currentUrl === '/') {
-          this.router.navigate(['organizations']);
+          this.router.navigate(['dashboard']);
         }
         this.shouldBehaveAsAuthenticated = true;
       }
