@@ -1,2 +1,27 @@
 server:
   port: 5000
+
+
+spring:
+
+  # database confs
+  datasource:
+    url: jdbc:postgresql://192.168.56.101:5432/postgres
+    platform: postgres
+    username: postgres
+    password: postgres
+
+  # JPA sql generations confs
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+
+  # Multipart confs
+  http:
+    multipart:
+      enabled: true
+      file-size-threshold: 100KB
+      max-request-size: 215MB
+      max-file-size: 200MB

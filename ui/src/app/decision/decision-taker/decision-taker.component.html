@@ -1,0 +1,18 @@
+<div class="overall">
+    <div class="topbar-leftsidebar">
+        <ng-container *ngIf="shouldBehaveAsAuthenticated">
+            <app-topbar></app-topbar>
+        </ng-container>
+
+        <ng-container *ngIf="!shouldBehaveAsAuthenticated">
+            <app-topbar [isAuthenticated]="false"></app-topbar>
+        </ng-container>
+
+    </div>
+
+    <div class="main-component-loader">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<p-toast></p-toast>

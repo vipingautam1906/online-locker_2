@@ -1,0 +1,30 @@
+
+
+  so. we are done with the registering user endpoint.
+  now. login endpoint that will take email and password,
+    and will generate the security object which will have access_token field filled.
+
+  the UI will save this access_token into its localStorage so that in future.
+    user can refer this token to perform its request.
+
+
+
+    request json data for creating a user
+
+    {
+    "email": "shivam@gmail.com",
+    "password": "whatsnew",
+    "firstName": "Shivam",
+    "lastName": "Sharma"
+    }
+
+
+
+request json data for login
+
+  /secured/credentials/login
+
+    {
+    "email": "shivam@gmail.com",
+    "password": "whatsnew"
+    }
