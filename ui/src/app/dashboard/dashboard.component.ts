@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UploadedFile } from '../models/file';
 import { FileService } from './file.service';
+import {ToastService} from "../toast.service";
 
 @Component({
 	selector: 'dashboard',
@@ -15,7 +16,9 @@ export class DashboardComponent implements OnInit {
 
 	constructor(
 		private fileService: FileService,
-		private router: Router) {
+		private router: Router,
+        private toastService: ToastService,
+        ) {
 	}
 
 	ngOnInit() {
@@ -25,6 +28,7 @@ export class DashboardComponent implements OnInit {
     }
 
     downloadFile(fileId: string, filename: string) {
+
         this.fileService.download(fileId).subscribe(res => {
             var url = window.URL.createObjectURL(res);
             var a = document.createElement('a');
@@ -35,7 +39,7 @@ export class DashboardComponent implements OnInit {
             a.download = res.filename;
             a.click();
             window.URL.revokeObjectURL(url);
-            a.remove(); // remove the element
+            a.remove();
         }, error => {
             console.log('download error:', JSON.stringify(error));
         }, () => {
@@ -45,8 +49,11 @@ export class DashboardComponent implements OnInit {
 
     public fileEvent($event) {
         this.fileUploading = true;
-        const fileSelected: File = $event.target.files[0];
+        const fileSelected: File = $event.files[0];
         this.fileService.upload(fileSelected).subscribe((response) => {
+
+            this.toastService.success('Uploading', 'File has been uploaded successfully');
+
             this.fileService.listAll().subscribe((r) => {
                 this.uploadedFiles = r.map(e => new UploadedFile(e));
             });

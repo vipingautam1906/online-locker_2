@@ -7,6 +7,7 @@ import {
     CheckboxModule,
     ConfirmDialogModule,
     DropdownModule,
+    FileUploadModule,
     GrowlModule,
     InputTextModule,
     PasswordModule,
@@ -39,6 +40,7 @@ const PrimeNGModules = [
 	CalendarModule,
 	SidebarModule,
     ProgressSpinnerModule,
+    FileUploadModule,
 ];
 
 const SharedComponents = [
