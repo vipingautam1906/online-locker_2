@@ -1,9 +1,8 @@
 package com.locker.security;
 
-import com.locker.security.entity.CurrentRequestUser;
 import com.locker.security.entity.Security;
-import com.locker.util.Randomizer;
 import com.locker.user.entities.User;
+import com.locker.util.Randomizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -41,7 +39,7 @@ public class CredentialsController {
         User loginUser = new User(appUsers.get(0));
 
 
-        q = entityManager.createNativeQuery("SELECT * FROM security WHERE user_id = ?")
+        q = entityManager.createNativeQuery("SELECT id, user_id, access_token FROM security WHERE user_id = ?")
                 .setParameter(1, loginUser.id);
 
         List<Object[]> securities = q.getResultList();
@@ -56,13 +54,11 @@ public class CredentialsController {
         sec.id = Randomizer.generateInt();
         sec.userId = loginUser.id;
         sec.accessToken = Randomizer.generateInt();
-        sec.expiryTimestamp = new Date();
 
-        int resultResponse = entityManager.createNativeQuery("INSERT INTO security (id, user_id, access_token, expiry_timestamp) VALUES (?, ?, ?, ?)")
+        int resultResponse = entityManager.createNativeQuery("INSERT INTO security (id, user_id, access_token) VALUES (?, ?, ?)")
                 .setParameter(1, sec.id)
                 .setParameter(2, sec.userId)
                 .setParameter(3, sec.accessToken)
-                .setParameter(4, sec.expiryTimestamp)
                 .executeUpdate();
         System.out.println(" insert security db response " + resultResponse);
 

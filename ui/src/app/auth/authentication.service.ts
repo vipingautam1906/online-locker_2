@@ -23,7 +23,7 @@ export class AuthenticationService {
 		return this.httpClient.post(oauthTokenUrl, body, {headers: httpHeaders});
 	}
 
-	doLogout(): Observable<string> {
+	doLogout(): Observable<any> {
 		return this.httpClient.delete('/public/credentials/logout/' +
             this.sessionService.getAccessToken());
 	}

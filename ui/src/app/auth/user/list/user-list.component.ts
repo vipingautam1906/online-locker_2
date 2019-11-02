@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
-import { User } from '../../../models/org/user';
+import { User } from '../../../models/user';
 
 @Component({
 	selector: 'user-list',
@@ -21,13 +21,5 @@ export class UserListComponent implements OnInit {
 		this.userService.getAll().subscribe((r) => {
 			this.users = r.map(e => new User(e));
 		});
-	}
-
-	openUser(user: User) {
-		this.router.navigate([`users/edit/${user.id}`]);
-	}
-
-	navigateToCreate() {
-		this.router.navigate([`users/add`]);
 	}
 }

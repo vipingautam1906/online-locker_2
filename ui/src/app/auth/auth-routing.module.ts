@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { PracticeComponent } from './practice/practice.component';
+import { UserFormComponent } from "./user/user-form/user-form.component";
+import { UserListComponent } from "./user/list/user-list.component";
 
 const routes: Routes = [
 	{path: 'login', component: LoginComponent},
-	{path: 'practice', component: PracticeComponent}
+    {path: 'users', component: UserListComponent},
+    {path: 'users/add', component: UserFormComponent}
 ];
 
 @NgModule({

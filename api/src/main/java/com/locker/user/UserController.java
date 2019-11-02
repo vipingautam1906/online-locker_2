@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/secured/users")
+@RequestMapping("/public/users")
 public class UserController {
 
     @Autowired
@@ -49,7 +49,6 @@ public class UserController {
                 .setParameter(5, user.lastName)
                 .executeUpdate();
         System.out.println(" insert db response " + resultResponse);
-
 
         user.id = newUserId;
 

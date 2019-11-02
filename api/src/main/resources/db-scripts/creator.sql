@@ -13,8 +13,7 @@ CREATE TABLE app_user (
 CREATE TABLE security (
   id INTEGER PRIMARY KEY,
   user_id INTEGER,
-  access_token INTEGER,
-  expiry_timestamp TIMESTAMP
+  access_token INTEGER
 );
 
 CREATE TABLE  uploaded_file (

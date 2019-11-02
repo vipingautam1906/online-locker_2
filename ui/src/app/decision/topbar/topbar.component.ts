@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../auth/authentication.service';
 import { SessionService } from '../../session.service';
@@ -8,16 +8,15 @@ import { SessionService } from '../../session.service';
 	templateUrl: './topbar.component.html',
 	styleUrls: ['./topbar.component.css']
 })
-export class TopbarComponent implements OnInit {
+export class TopbarComponent {
+
+    @Input() isAuthenticated: boolean = true;
 
 	constructor(
 		private router: Router,
 		private authService: AuthenticationService,
 		private sessionService: SessionService,
 	) {
-	}
-
-	ngOnInit() {
 	}
 
 	go(url: string) {

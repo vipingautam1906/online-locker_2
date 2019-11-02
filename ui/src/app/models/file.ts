@@ -1,4 +1,4 @@
-import { Resource } from './org';
+import { Resource } from './common';
 
 export class UploadedFile extends Resource {
 

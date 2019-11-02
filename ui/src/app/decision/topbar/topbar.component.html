@@ -1,7 +1,10 @@
-<div>
-    <button pButton class="ui-button-secondary" label="Organization" (click)="go('organizations')"></button>
-    <button pButton class="ui-button-secondary" label="User" (click)="go('users')"></button>
-
+<div *ngIf="isAuthenticated">
+    <button pButton class="ui-button-secondary" label="Dashboard" (click)="go('dashboard')"></button>
     <button pButton class="ui-button-secondary" label="Logout" (click)="doLogout()"></button>
+</div>
 
+<div *ngIf="!isAuthenticated">
+    <button pButton class="ui-button-secondary" label="Login" (click)="go('login')"></button>
+    <button pButton class="ui-button-secondary" label="Users List" (click)="go('users')"></button>
+    <button pButton class="ui-button-secondary" label="New User Registration" (click)="go('users/add')"></button>
 </div>

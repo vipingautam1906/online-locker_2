@@ -16,13 +16,6 @@ import {
     SidebarModule
 } from 'primeng/primeng';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-	CardComponent,
-	CardDescriptionBodyComponent,
-	CardDescriptionComponent, CardDescriptionFooterComponent, CardDescriptionHeaderComponent,
-	CardSummaryBodyComponent,
-	CardSummaryComponent, CardSummaryFooterComponent, CardSummaryHeaderComponent
-} from './card/card.component';
 
 const AngularModules = [
 	CommonModule,
@@ -49,17 +42,6 @@ const PrimeNGModules = [
 ];
 
 const SharedComponents = [
-	CardComponent,
-
-	CardSummaryComponent,
-	CardSummaryHeaderComponent,
-	CardSummaryBodyComponent,
-	CardSummaryFooterComponent,
-
-	CardDescriptionComponent,
-	CardDescriptionHeaderComponent,
-	CardDescriptionBodyComponent,
-	CardDescriptionFooterComponent,
 ];
 
 @NgModule(

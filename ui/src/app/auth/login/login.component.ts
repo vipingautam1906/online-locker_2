@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
 
 		});
 	}
+
 	go(url: string) {
 		this.router.navigate([url]);
 	}

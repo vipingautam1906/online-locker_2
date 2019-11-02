@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UploadedFile } from '../models/org/file';
+import { UploadedFile } from '../models/file';
 import { FileService } from './file.service';
 
 @Component({

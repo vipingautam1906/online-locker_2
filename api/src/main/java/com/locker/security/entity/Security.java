@@ -7,13 +7,12 @@ public class Security {
     public Integer id;
     public Integer userId;
     public Integer accessToken;
-    public Date expiryTimestamp;
 
     public Security() {}
 
     public Security(Object[] u) {
-        this.userId = (Integer) u[0];
-        this.accessToken = (Integer) u[1];
-        this.expiryTimestamp = new Date((Integer)u[2]);
+        this.id = (Integer) u[0];
+        this.userId = (Integer) u[1];
+        this.accessToken = (Integer) u[2];
     }
 }
