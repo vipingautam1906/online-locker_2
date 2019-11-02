@@ -1,0 +1,11 @@
+.user-list-item {
+    padding: 8px;
+    background: #f3f3f3;
+    margin: 3px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 2px;
+    box-shadow: 0 9px 4px -6px #dadada;
+    border: 1px solid #e8e8e8;
+    cursor: pointer;
+}

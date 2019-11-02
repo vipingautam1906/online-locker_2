@@ -1,0 +1,44 @@
+<form [formGroup]="userForm" *ngIf="!!userForm">
+    <div class="ui-lg-7 ui-md-5 ui-g-7 ui-sm-12 form-cont">
+        <div class="ui-g-4">
+            <label>First Name</label>
+        </div>
+        <div class="ui-g-8">
+            <input pInputText
+                   type="text"
+                   formControlName="firstName"
+                   placeholder="First Name"/>
+        </div>
+        <div class="ui-g-4">
+            <label>First Name</label>
+        </div>
+        <div class="ui-g-8">
+            <input pInputText
+                   type="text"
+                   formControlName="lastName"
+                   placeholder="Last Name"/>
+        </div>
+        <div class="ui-g-4">
+            <label>Email</label>
+        </div>
+        <div class="ui-g-8">
+            <input pInputText
+                   type="text"
+                   formControlName="email"
+                   placeholder="Enter Email"/>
+        </div>
+        <div class="ui-g-4">
+            <label>Password</label>
+        </div>
+        <div class="ui-g-8">
+            <input pInputText
+                   type="password"
+                   formControlName="password"
+                   placeholder="Enter Password"/>
+        </div>
+
+        <div class="ui-g-12">
+            <button pButton label="Save" (click)="saveUser()"></button>
+        </div>
+    </div>
+</form>

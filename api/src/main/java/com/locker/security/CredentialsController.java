@@ -1,8 +1,8 @@
 package com.locker.security;
 
 import com.locker.security.entity.Security;
-import com.locker.util.Randomizer;
 import com.locker.user.entities.User;
+import com.locker.util.Randomizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -39,16 +38,27 @@ public class CredentialsController {
 
         User loginUser = new User(appUsers.get(0));
 
+
+        q = entityManager.createNativeQuery("SELECT id, user_id, access_token FROM security WHERE user_id = ?")
+                .setParameter(1, loginUser.id);
+
+        List<Object[]> securities = q.getResultList();
+
+        if (!securities.isEmpty()) {
+            Security security = new Security(securities.get(0));
+            return ResponseEntity.ok(security);
+        }
+
         // insert into security table now.
         Security sec = new Security();
+        sec.id = Randomizer.generateInt();
         sec.userId = loginUser.id;
         sec.accessToken = Randomizer.generateInt();
-        sec.expiryTimestamp = new Date();
 
-        int resultResponse = entityManager.createNativeQuery("INSERT INTO security (user_id, access_token, expiry_timestamp) VALUES (?, ?, ?)")
-                .setParameter(1, sec.userId)
-                .setParameter(2, sec.accessToken)
-                .setParameter(3, sec.expiryTimestamp)
+        int resultResponse = entityManager.createNativeQuery("INSERT INTO security (id, user_id, access_token) VALUES (?, ?, ?)")
+                .setParameter(1, sec.id)
+                .setParameter(2, sec.userId)
+                .setParameter(3, sec.accessToken)
                 .executeUpdate();
         System.out.println(" insert security db response " + resultResponse);
 
@@ -56,9 +66,13 @@ public class CredentialsController {
 
     }
 
-    @GetMapping("/logout")
-    public String doLogout() {
-        return "nothing here go back";
+    @DeleteMapping("/logout/{securityTokenId}")
+    @Transactional
+    public void doLogout(@PathVariable Integer securityTokenId) {
+        int resultResponse = entityManager.createNativeQuery("DELETE FROM security WHERE id = ?")
+                .setParameter(1, securityTokenId)
+                .executeUpdate();
+        System.out.println("delete security db response " + resultResponse);
     }
 
 }

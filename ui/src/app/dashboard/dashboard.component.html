@@ -1,0 +1,33 @@
+<div class="ui-g" style="padding: 25px">
+
+    <p-progressSpinner *ngIf="fileUploading"
+                       [style]="{width: '50px', height: '50px'}"
+                       strokeWidth="4"
+                       animationDuration=".5s">
+    </p-progressSpinner>
+
+    <input type="file" (change)="fileEvent($event)">
+</div>
+
+<div class="ui-g">
+
+    <div class="ui-g-6" *ngFor="let uf of uploadedFiles; let idx = index">
+        <div class="ui-g file-item">
+            <div class="ui-g-2">{{ idx }}</div>
+            <div class="ui-g-6">{{ uf.fileName }}</div>
+
+            <div class="ui-g-2">
+                <button pButton type="button" label="Download" (click)="downloadFile(uf.id, uf.fileName)"
+                        class="ui-button-success" icon="pi pi-download">
+                </button>
+            </div>
+
+            <div class="ui-g-2">
+                <button pButton type="button" label="Remove" (click)="removeFile(uf.id)"
+                        class="ui-button-secondary" icon="pi pi-trash">
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

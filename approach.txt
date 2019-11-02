@@ -6,3 +6,25 @@
 
   the UI will save this access_token into its localStorage so that in future.
     user can refer this token to perform its request.
+
+
+
+    request json data for creating a user
+
+    {
+    "email": "shivam@gmail.com",
+    "password": "whatsnew",
+    "firstName": "Shivam",
+    "lastName": "Sharma"
+    }
+
+
+
+request json data for login
+
+  /secured/credentials/login
+
+    {
+    "email": "shivam@gmail.com",
+    "password": "whatsnew"
+    }

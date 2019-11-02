@@ -36,6 +36,7 @@ public class FileController {
     private EntityManager entityManager;
 
     @GetMapping
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<UploadedFile> getAllUploadedFiles() {
 
         Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE user_id = ?")
@@ -103,7 +104,30 @@ public class FileController {
         }
     }
 
+    public void removeFileAsResource(String fileName) {
+        this.fileStorageLocation = Paths.get(UPLOADED_FOLDER).toAbsolutePath().normalize();
+
+        try {
+
+            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                boolean status = resource.getFile().delete();
+                if (!status)
+                    throw new RuntimeException("File " + fileName + " could not be removed");
+            } else {
+                throw new RuntimeException("File not found " + fileName);
+            }
+        } catch (MalformedURLException ex) {
+            throw new RuntimeException("File not found " + fileName, ex);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @GetMapping("/download/{fileId}")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public ResponseEntity<Resource> download(@PathVariable String fileId, HttpServletRequest request) {
 
         Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE id = ? AND user_id = ?")
@@ -137,5 +161,35 @@ public class FileController {
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
+    }
+
+    @DeleteMapping("/{fileId}")
+    @Transactional
+    public void remove(@PathVariable Integer fileId) {
+
+        Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE id = ? AND user_id = ?")
+                .setParameter(1, fileId)
+                .setParameter(2, CurrentRequestUser.securedUser.userId);
+        List<Object[]> uploadedFilesRes = q.getResultList();
+
+
+        /*
+        take the path of that fileId..
+        and try to remove that from filesystem.
+        and then finally from db records too.
+
+         */
+        if (uploadedFilesRes.isEmpty())
+            throw new RuntimeException("Uploaded file Id " + fileId + " doesn't exists for this user");
+
+        UploadedFile fileDBObject = new UploadedFile(uploadedFilesRes.get(0));
+
+        // remove file from file system
+        removeFileAsResource(fileDBObject.fileName);
+
+        entityManager.createNativeQuery("DELETE FROM uploaded_file WHERE id = ? AND user_id = ?")
+                .setParameter(1, fileId)
+                .setParameter(2, CurrentRequestUser.securedUser.userId)
+                .executeUpdate();
     }
 }

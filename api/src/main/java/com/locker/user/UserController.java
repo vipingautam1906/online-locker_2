@@ -14,13 +14,14 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/secured/users")
+@RequestMapping("/public/users")
 public class UserController {
 
     @Autowired
     private EntityManager entityManager;
 
     @GetMapping
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<User> getAllUsers() {
 
         Query q = entityManager.createNativeQuery("SELECT * FROM app_user");
@@ -49,16 +50,15 @@ public class UserController {
                 .executeUpdate();
         System.out.println(" insert db response " + resultResponse);
 
-
         user.id = newUserId;
 
         return ResponseEntity.ok(user);
 
     }
 
-    @GetMapping("/getVipin")
+    @GetMapping("/justTest")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<String> saveUser() {
         return Arrays.asList("First", "Second", "Third");
     }
-
 }

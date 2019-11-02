@@ -1,0 +1,10 @@
+{
+    "/secured": {
+        "target": "http://localhost:5000",
+        "secure": false
+    },
+    "/public": {
+        "target": "http://localhost:5000",
+        "secure": false
+    }
+}
