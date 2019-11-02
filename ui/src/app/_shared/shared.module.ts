@@ -46,27 +46,16 @@ const SharedComponents = [
 
 @NgModule(
 	{
-
 		declarations: [
 			...SharedComponents,
 		],
 		imports: [
-			/* Angular Modules Importing */
 			...AngularModules,
-
-			/* PrimeNG Module Importing */
-			...PrimeNGModules,
-
-			/* App Specific Module Importing */
-		],
+            ...PrimeNGModules,
+        ],
 		exports: [
-			/* Angular Modules Exporting */
 			...AngularModules,
-
-			/* PrimgNG Modules Exporting */
 			...PrimeNGModules,
-
-			/* App Specific Components Exporting */
 			...SharedComponents,
 		]
 	})

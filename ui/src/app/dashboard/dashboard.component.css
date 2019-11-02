@@ -1,11 +1,11 @@
-.user-list-item {
+.file-item {
     padding: 8px;
-    background: #f3f3f3;
+    background: #f9f9f9;
     margin: 3px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 2px;
-    box-shadow: 0 9px 4px -6px #dadada;
-    border: 1px solid #e8e8e8;
+    box-shadow: 0 9px 4px -6px #a0a0a0;
+    border: 1px solid #c5c5c5;
     cursor: pointer;
 }

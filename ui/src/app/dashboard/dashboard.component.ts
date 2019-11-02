@@ -64,4 +64,16 @@ export class DashboardComponent implements OnInit {
             this.fileUploading = false;
         });
     }
+
+    removeFile(fileId: string) {
+
+        this.fileService.remove(fileId).subscribe(res => {
+            this.toastService.success('Deleting', 'File has been deleted successfully');
+
+            this.fileService.listAll().subscribe((r) => {
+                this.uploadedFiles = r.map(e => new UploadedFile(e));
+            });
+
+        });
+    }
 }
