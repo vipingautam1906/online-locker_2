@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
 	}
 
 	doLogin() {
-
 		const val = this.loginForm.value;
 		this.authService.doLogin(val.email, val.password).subscribe((e) => {
 			this.sessionService.saveAllTokens(e);
