@@ -8,20 +8,14 @@ import { SessionService } from './session.service';
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-    constructor(private sessionService: SessionService) {
-    }
+    constructor(private sessionService: SessionService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-        if (!req.url.startsWith('/public/')
-        ) {
+        if (!req.url.startsWith('/public/')) {
             req = req.clone({
-                setHeaders: {
-                    AccessToken: this.sessionService.getAccessToken()
-                }
+                setHeaders: { AccessToken: this.sessionService.getAccessToken() }
             });
         }
-
         return next.handle(req);
     }
 }
