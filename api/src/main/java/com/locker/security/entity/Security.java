@@ -1,7 +1,5 @@
 package com.locker.security.entity;
 
-import java.util.Date;
-
 public class Security {
 
     public Integer id;

@@ -58,9 +58,7 @@ export class DashboardComponent implements OnInit {
                 this.uploadedFiles = r.map(e => new UploadedFile(e));
             });
             return response;
-        }, (e) => {
-            console.log('set any error actions...' + e);
-        }, () => {
+        }, e => console.log(e), () => {
             this.fileUploading = false;
         });
     }
