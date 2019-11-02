@@ -23,6 +23,5 @@ export class SessionService {
 
 	deleteTokens() {
 		localStorage.removeItem('access_token');
-		localStorage.removeItem('refresh_token');
 	}
 }

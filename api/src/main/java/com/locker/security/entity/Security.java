@@ -14,6 +14,6 @@ public class Security {
     public Security(Object[] u) {
         this.userId = (Integer) u[0];
         this.accessToken = (Integer) u[1];
-        this.expiryTimestamp = (Date) u[2];
+        this.expiryTimestamp = new Date((Integer)u[2]);
     }
 }

@@ -11,6 +11,7 @@ import { FileService } from './file.service';
 export class DashboardComponent implements OnInit {
 
 	uploadedFiles: UploadedFile[] = [];
+    fileUploading: boolean = false;
 
 	constructor(
 		private fileService: FileService,
@@ -18,28 +19,42 @@ export class DashboardComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.fileService.getAll().subscribe((r) => {
+		this.fileService.listAll().subscribe((r) => {
 			this.uploadedFiles = r.map(e => new UploadedFile(e));
 		});
-  }
+    }
 
-  downloadFile(id: string) {
-  }
+    downloadFile(fileId: string, filename: string) {
+        this.fileService.download(fileId).subscribe(res => {
+            var url = window.URL.createObjectURL(res);
+            var a = document.createElement('a');
+            document.body.appendChild(a);
+            a.setAttribute('style', 'display: none');
+            a.href = url;
+            res.filename = filename;
+            a.download = res.filename;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove(); // remove the element
+        }, error => {
+            console.log('download error:', JSON.stringify(error));
+        }, () => {
+            console.log('Completed file download.');
+        });
+    }
 
-  public fileEvent($event) {
-    const fileSelected: File = $event.target.files[0];
-    this.fileService.uploadFile(fileSelected)
-    .subscribe( (response) => {
-       console.log('set any success actions...');
-
-       this.fileService.getAll().subscribe((r) => {
-        this.uploadedFiles = r.map(e => new UploadedFile(e));
-      });
-
-       return response;
-     },
-      (error) => {
-        console.log('set any error actions...');
-      });
- }
+    public fileEvent($event) {
+        this.fileUploading = true;
+        const fileSelected: File = $event.target.files[0];
+        this.fileService.upload(fileSelected).subscribe((response) => {
+            this.fileService.listAll().subscribe((r) => {
+                this.uploadedFiles = r.map(e => new UploadedFile(e));
+            });
+            return response;
+        }, (e) => {
+            console.log('set any error actions...' + e);
+        }, () => {
+            this.fileUploading = false;
+        });
+    }
 }

@@ -1,5 +1,6 @@
 package com.locker.security;
 
+import com.locker.security.entity.CurrentRequestUser;
 import com.locker.security.entity.Security;
 import com.locker.util.Randomizer;
 import com.locker.user.entities.User;
@@ -39,6 +40,17 @@ public class CredentialsController {
 
         User loginUser = new User(appUsers.get(0));
 
+
+        q = entityManager.createNativeQuery("SELECT * FROM security WHERE user_id = ?")
+                .setParameter(1, loginUser.id);
+
+        List<Object[]> securities = q.getResultList();
+
+        if (!securities.isEmpty()) {
+            Security security = new Security(securities.get(0));
+            return ResponseEntity.ok(security);
+        }
+
         // insert into security table now.
         Security sec = new Security();
         sec.id = Randomizer.generateInt();
@@ -58,9 +70,13 @@ public class CredentialsController {
 
     }
 
-    @GetMapping("/logout")
-    public String doLogout() {
-        return "nothing here go back";
+    @DeleteMapping("/logout/{securityTokenId}")
+    @Transactional
+    public void doLogout(@PathVariable Integer securityTokenId) {
+        int resultResponse = entityManager.createNativeQuery("DELETE FROM security WHERE id = ?")
+                .setParameter(1, securityTokenId)
+                .executeUpdate();
+        System.out.println("delete security db response " + resultResponse);
     }
 
 }

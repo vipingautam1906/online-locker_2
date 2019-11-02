@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { PasswordReset } from '../models/org/password';
+import { Observable } from 'rxjs';
+import { SessionService } from "../session.service";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AuthenticationService {
 
-	constructor(private httpClient: HttpClient) {
+	constructor(private httpClient: HttpClient,
+                private sessionService: SessionService) {
 	}
 
 	doLogin(email: string, password: string): Observable<any> {
@@ -24,20 +24,7 @@ export class AuthenticationService {
 	}
 
 	doLogout(): Observable<string> {
-		return of('Then What');
-	}
-
-	// password related things.
-	forgot(email: string) {
-		return this.httpClient.post(`/api/password/forgot`, email);
-	}
-
-	getPasswordReset(prId: string): Observable<PasswordReset> {
-		return this.httpClient.get(`/api/password/reset/${prId}`)
-			.pipe(map(r => new PasswordReset(r)));
-	}
-
-	patchNewPassword(prId: string, password: string) {
-		return this.httpClient.patch(`/api/password/reset/${prId}/newPassword`, password);
+		return this.httpClient.delete('/public/credentials/logout/' +
+            this.sessionService.getAccessToken());
 	}
 }

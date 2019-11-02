@@ -36,6 +36,7 @@ public class FileController {
     private EntityManager entityManager;
 
     @GetMapping
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<UploadedFile> getAllUploadedFiles() {
 
         Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE user_id = ?")
@@ -104,6 +105,7 @@ public class FileController {
     }
 
     @GetMapping("/download/{fileId}")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public ResponseEntity<Resource> download(@PathVariable String fileId, HttpServletRequest request) {
 
         Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE id = ? AND user_id = ?")

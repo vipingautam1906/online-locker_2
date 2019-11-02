@@ -18,6 +18,7 @@ import { ToastService } from './toast.service';
 import { MessageService } from 'primeng/api';
 import { CacheService } from './cache.service';
 import { ToastModule } from 'primeng/toast';
+import {DashboardModule} from "./dashboard/dashboard.module";
 
 @NgModule({
 
@@ -35,6 +36,7 @@ import { ToastModule } from 'primeng/toast';
 		SharedModule,
 		AuthModule,
 		AdminModule,
+        DashboardModule,
 		AppRoutingModule,
 
 		ToastModule,

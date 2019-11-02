@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-	AutoCompleteModule,
-	ButtonModule,
-	CalendarModule,
-	CheckboxModule,
-	ConfirmDialogModule,
-	DropdownModule,
-	GrowlModule,
-	InputTextModule,
-	PasswordModule,
-	RadioButtonModule,
-	SelectButtonModule,
-	SidebarModule
+    AutoCompleteModule,
+    ButtonModule,
+    CalendarModule,
+    CheckboxModule,
+    ConfirmDialogModule,
+    DropdownModule,
+    GrowlModule,
+    InputTextModule,
+    PasswordModule,
+    ProgressSpinnerModule,
+    RadioButtonModule,
+    SelectButtonModule,
+    SidebarModule
 } from 'primeng/primeng';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -44,6 +45,7 @@ const PrimeNGModules = [
 	ConfirmDialogModule,
 	CalendarModule,
 	SidebarModule,
+    ProgressSpinnerModule,
 ];
 
 const SharedComponents = [
@@ -58,7 +60,7 @@ const SharedComponents = [
 	CardDescriptionHeaderComponent,
 	CardDescriptionBodyComponent,
 	CardDescriptionFooterComponent,
-]
+];
 
 @NgModule(
 	{

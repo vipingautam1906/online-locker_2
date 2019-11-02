@@ -21,6 +21,7 @@ public class UserController {
     private EntityManager entityManager;
 
     @GetMapping
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<User> getAllUsers() {
 
         Query q = entityManager.createNativeQuery("SELECT * FROM app_user");
@@ -56,9 +57,9 @@ public class UserController {
 
     }
 
-    @GetMapping("/getVipin")
+    @GetMapping("/justTest")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<String> saveUser() {
         return Arrays.asList("First", "Second", "Third");
     }
-
 }

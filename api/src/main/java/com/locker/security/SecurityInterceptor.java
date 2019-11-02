@@ -19,6 +19,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
     private EntityManager entityManager;
 
     @Override
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
 

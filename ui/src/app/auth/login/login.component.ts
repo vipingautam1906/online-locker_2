@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 		const val = this.loginForm.value;
 		this.authService.doLogin(val.email, val.password).subscribe((e) => {
 			this.sessionService.saveAllTokens(e);
-			this.router.navigate(['users']);
+			this.router.navigate(['dashboard']);
 		}, (err) => {
 		  console.error('some ex occured' + err);
 

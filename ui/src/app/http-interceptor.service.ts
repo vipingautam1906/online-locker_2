@@ -4,25 +4,24 @@ import { Observable } from 'rxjs';
 import { SessionService } from './session.service';
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-	constructor(private sessionService: SessionService) {
-	}
+    constructor(private sessionService: SessionService) {
+    }
 
-	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-		if (req.url !== '/oauth/token' &&
-			!req.url.startsWith('/api/password')
-		) {
-			req = req.clone({
-        setHeaders: {
-          AccessToken: this.sessionService.getAccessToken()
+        if (!req.url.startsWith('/public/')
+        ) {
+            req = req.clone({
+                setHeaders: {
+                    AccessToken: this.sessionService.getAccessToken()
+                }
+            });
         }
-			});
-		}
 
-		return next.handle(req);
-	}
+        return next.handle(req);
+    }
 }

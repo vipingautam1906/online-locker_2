@@ -26,10 +26,8 @@ export class TopbarComponent implements OnInit {
 
 	doLogout() {
 		this.authService.doLogout().subscribe((e) => {
-			console.log('finnally ' + e);
 			this.sessionService.deleteTokens();
 			this.router.navigate(['login']);
-
 		});
 	}
 }
