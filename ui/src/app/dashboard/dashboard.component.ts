@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
 
     public fileEvent($event) {
         this.fileUploading = true;
-        const fileSelected: File = $event.files[0];
+        const fileSelected: File = $event.target.files[0];
         this.fileService.upload(fileSelected).subscribe((response) => {
 
             this.toastService.success('Uploading', 'File has been uploaded successfully');

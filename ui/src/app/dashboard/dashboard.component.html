@@ -1,7 +1,13 @@
 <div class="ui-g" style="padding: 25px">
-    <p-fileUpload mode="basic"
-                  (onSelect)="fileEvent($event)">
-    </p-fileUpload>
+
+    <p-progressSpinner *ngIf="fileUploading"
+                       [style]="{width: '50px', height: '50px'}"
+                       strokeWidth="4"
+                       animationDuration=".5s">
+    </p-progressSpinner>
+
+    <input type="file" (change)="fileEvent($event)">
+
 </div>
 
 <div class="ui-g">
