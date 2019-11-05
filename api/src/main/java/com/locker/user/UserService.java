@@ -1,6 +1,5 @@
 package com.locker.user;
 
-import com.locker.file.entity.UploadedFile;
 import com.locker.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class UserService {
@@ -16,28 +16,32 @@ public class UserService {
     @Autowired
     private EntityManager entityManager;
 
-    public List<UploadedFile> getAll(Integer userId) {
+    public List<User> getAll() {
 
-        Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE user_id = ?")
-                .setParameter(1, userId);
-        List<Object[]> uploadedFilesRes = q.getResultList();
+        Query q = entityManager.createNativeQuery("SELECT * FROM app_user");
+        List<Object[]> appUsers = q.getResultList();
 
-        List<UploadedFile> allUploadedFiles = new ArrayList<UploadedFile>(); // add all db users in this list.
-        for (Object[] uf : uploadedFilesRes) {
-            UploadedFile u = new UploadedFile(uf);
-            allUploadedFiles.add(u);
+        List<User> allUsers = new ArrayList<User>(); // add all db users in this list.
+        for (Object[] a : appUsers) {
+            User u = new User(a);
+            allUsers.add(u);
         }
-        return allUploadedFiles;
-
+        return allUsers;
     }
 
-    public void save(UploadedFile up) {
-        entityManager.createNativeQuery("INSERT INTO uploaded_file (id, user_id, file_name, relative_path) VALUES (?, ?, ?, ?)")
-                .setParameter(1, up.id)
-                .setParameter(2, up.userId)
-                .setParameter(3, up.fileName)
-                .setParameter(4, up.relativePath)
+    public User save(User user) {
+        Integer newUserId = new Random().nextInt();
+        user.id = newUserId;
+
+        int resultResponse = entityManager.createNativeQuery("INSERT INTO app_user (id, email, password, first_name, last_name) VALUES (?, ?, ?, ?, ?)")
+                .setParameter(1, user.id)
+                .setParameter(2, user.email)
+                .setParameter(3, user.password)
+                .setParameter(4, user.firstName)
+                .setParameter(5, user.lastName)
                 .executeUpdate();
+        System.out.println(" insert db response " + resultResponse);
+        return user;
     }
 
     public User getByEmailAndPassword(String email, String password) {
@@ -53,11 +57,4 @@ public class UserService {
 
         return new User(appUsers.get(0));
     }
-
-    public void deleteById(Integer fileId) {
-        entityManager.createNativeQuery("DELETE FROM uploaded_file WHERE id = ?")
-                .setParameter(1, fileId)
-                .executeUpdate();
-    }
-
 }
