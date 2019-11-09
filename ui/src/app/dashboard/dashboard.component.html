@@ -10,17 +10,17 @@
 <div class="ui-g">
     <div class="ui-g-6" *ngFor="let uf of uploadedFiles; let idx = index">
         <div class="ui-g file-item">
-            <div class="ui-g-2">{{ idx }}</div>
+            <div class="ui-g-1">{{ idx+1 }}.</div>
             <div class="ui-g-6">{{ uf.fileName }}</div>
 
             <div class="ui-g-2">
-                <button pButton type="button" label="Download" (click)="downloadFile(uf.id, uf.fileName)"
+                <button pButton type="button" label="Save" (click)="downloadFile(uf.id, uf.fileName)"
                         class="ui-button-success" icon="pi pi-download">
                 </button>
             </div>
             <div class="ui-g-2">
-                <button pButton type="button" label="Remove" (click)="removeFile(uf.id)"
-                        class="ui-button-secondary" icon="pi pi-trash">
+                <button pButton type="button" label="Delete" (click)="removeFile(uf.id)"
+                        class="ui-button-danger" icon="pi pi-trash">
                 </button>
             </div>
         </div>
