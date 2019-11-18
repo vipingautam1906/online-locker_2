@@ -7,7 +7,8 @@
             <input pInputText
                    type="text"
                    formControlName="firstName"
-                   placeholder="First Name"/>
+				   placeholder="First Name"
+				   required />
         </div>
         <div class="ui-g-4">
             <label>First Name</label>
@@ -16,7 +17,8 @@
             <input pInputText
                    type="text"
                    formControlName="lastName"
-                   placeholder="Last Name"/>
+				   placeholder="Last Name"
+				   required/>
         </div>
         <div class="ui-g-4">
             <label>Email</label>
@@ -25,7 +27,9 @@
             <input pInputText
                    type="text"
                    formControlName="email"
-                   placeholder="Enter Email"/>
+				   placeholder="Enter Email"
+				   required
+				   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
         </div>
         <div class="ui-g-4">
             <label>Password</label>
@@ -34,11 +38,12 @@
             <input pInputText
                    type="password"
                    formControlName="password"
-                   placeholder="Enter Password"/>
+				   placeholder="Enter Password"
+				   required/>
         </div>
 
         <div class="ui-g-12">
-            <button pButton label="Save" (click)="saveUser()"></button>
+            <button pButton label="Save" (click)="saveUser()" [disabled]="!userForm.valid"></button>
         </div>
     </div>
 </form>

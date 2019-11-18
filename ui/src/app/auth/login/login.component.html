@@ -12,18 +12,22 @@
                     <input pInputText
                            type="text"
                            placeholder="Enter Email"
-                           formControlName="email"/>
+						   formControlName="email"
+						   required
+						   pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
                 </div>
                 <div class="ui-g-12">
                     <input pPassword
                            type="password"
                            placeholder="Enter Password"
-                           formControlName="password"/>
+						   formControlName="password"
+						   required />
                 </div>
                 <div class="ui-g-12">
                     <button pButton
                             label="Login"
-                            (click)="doLogin()">
+							(click)="doLogin()"
+							[disabled]="!loginForm.valid">
                     </button>
                 </div>
             </div>
