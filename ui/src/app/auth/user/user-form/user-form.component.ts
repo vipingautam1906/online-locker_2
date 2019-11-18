@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {User} from '../../../models/user';
+import {User} from '../../../models/common';
 import {UserService} from '../user.service';
 import {ToastService} from '../../../toast.service';
 

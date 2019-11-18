@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UploadedFile } from '../models/file';
+import { UploadedFile } from '../models/common';
 import { FileService } from './file.service';
 import {ToastService} from "../toast.service";
 
@@ -16,10 +15,7 @@ export class DashboardComponent implements OnInit {
 
 	constructor(
 		private fileService: FileService,
-		private router: Router,
-        private toastService: ToastService,
-        ) {
-	}
+        private toastService: ToastService) { }
 
 	ngOnInit() {
 		this.fileService.listAll().subscribe((r) => {
@@ -71,7 +67,6 @@ export class DashboardComponent implements OnInit {
             this.fileService.listAll().subscribe((r) => {
                 this.uploadedFiles = r.map(e => new UploadedFile(e));
             });
-
         });
     }
 }

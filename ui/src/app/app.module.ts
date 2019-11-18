@@ -14,7 +14,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastService } from './toast.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { DashboardModule } from "./dashboard/dashboard.module";
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
 

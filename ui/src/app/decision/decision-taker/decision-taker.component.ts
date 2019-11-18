@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {SessionService} from '../../session.service';
-import {ActivatedRoute, Event, NavigationStart, Router} from '@angular/router';
+import {Event, NavigationStart, Router} from '@angular/router';
 
 @Component({
     selector: 'decision-taker',
@@ -14,13 +14,11 @@ export class DecisionTakerComponent {
     private noAuthNeededRoutes: string[] = [
         '/login',
         '/users',
-        '/error',
-        '/unauthorized',
+        '/error'
     ];
 
     constructor(
         private sessionService: SessionService,
-        private activatedRoute: ActivatedRoute,
         private router: Router,
     ) {
         this.shouldBehaveAsAuthenticated = false;
