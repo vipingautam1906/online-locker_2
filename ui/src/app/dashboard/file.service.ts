@@ -23,7 +23,6 @@ export class FileService {
             responseType: 'blob'
         });
     }
-
     remove(fileId: string): Observable<any> {
         return this.httpClient.delete(`/secured/files/${fileId}`);
     }
