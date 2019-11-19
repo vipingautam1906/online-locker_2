@@ -1,0 +1,96 @@
+
+Feature Outline: Credential manipulation inside application.
+
+    Scenario Outline: Login into the application
+        Given: there exists a user with <email> and <password> in database
+        When: user performs login with <email> and <password>
+        Then: an accessToken will be generated for that user
+
+    Scenario Outline: Login fails for a user
+        Given: there exists a user with <email> and <password>
+        When: user performs login with <email> and <randomPassword>
+        Then: login will fail telling email/password doesn't exists
+
+    Scenario Outline: Logout from the application
+        Given: there exists an already generated <accessToken>
+        When: user performs logout with that <accessToken>
+        Then: security record from database for that token will be removed
+
+    Scenario Outline: Logout from the application
+        Given: there exists an invalid <accessToken>
+        When: user performs logout with that <accessToken>
+        Then: logout fails telling it doesn't exists
+
+
+
+________________________________________________________________________
+
+
+Feature Outline: User manipulation inside application.
+
+    Scenario Outline: Creating a user
+        Given: user create a user object by fillings its fields <email>,
+            <password>, <firstName>, <lastName>
+        When: user saves that object
+        Then: user object will be saved in database with a new id
+
+    Scenario Outline: Retrieving all users
+        Given: there are two users in the system
+        When: user performs GET all users
+        Then: two users object will be returned
+
+
+________________________________________________________________________
+
+
+Feature Outline: File Manipulation inside application.
+
+    Scenario Outline: Uploading a file
+        Given: there exists a user with <email> and <password> in database
+        When: user performs login with <email> and <password>
+        Then: <accessToken> will be generated for him for future requests.
+
+        Given: there exists a Multipart <newFile> to Upload
+        And: User adds the <accessToken> in request header "AccessToken"
+
+        When: User uploads the <newFile>
+        Then: file will be uploaded in server's temp folder
+        And: UploadedFile also be saved in database.
+
+
+    Scenario Outline: downloading a file
+        Given: there exists a user with <email> and <password> in database
+        When: user performs login with <email> and <password>
+        Then: <accessToken> will be generated for him for future requests.
+
+        Given: there exists a UploadedFile with <id>
+        And: User adds the <accessToken> in request header "AccessToken"
+
+        When: User downloads the file with <id>
+        Then: blob file object will be saved to reponse
+
+
+    Scenario Outline: Deleting a file
+        Given: there exists a user with <email> and <password> in database
+        When: user performs login with <email> and <password>
+        Then: <accessToken> will be generated for him for future requests.
+
+        Given: there exists a UploadedFile with <id>
+        And: User adds the <accessToken> in request header "AccessToken"
+
+        When: User deletes the file with <id>
+        Then: file will be removed from server's directory
+        And: UploadedFile will be removed from database
+
+
+    Scenario Outline: Retrieving all files
+        Given: there exists a user with <email> and <password> in database
+        When: user performs login with <email> and <password>
+        Then: <accessToken> will be generated for him for future requests.
+
+        Given: there exists multiple UploadedFiles
+        And: User adds the <accessToken> in request header "AccessToken"
+
+        When: User performs GET all files
+        Then: Multiple UploadedFile list will be returned
+
