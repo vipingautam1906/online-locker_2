@@ -1,7 +1,7 @@
 package com.locker.security;
 
 import com.locker.security.entity.Security;
-import com.locker.user.UserService;
+import com.locker.user.UserRepository;
 import com.locker.user.entities.User;
 import com.locker.util.Randomizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +19,10 @@ public class CredentialsController {
     private EntityManager entityManager;
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Autowired
-    private SecurityService securityService;
+    private SecurityRepository securityRepository;
 
     @PostMapping("/login")
     @Transactional
@@ -32,9 +32,9 @@ public class CredentialsController {
         // if yes. then insert a record in security table. and return that too.
         // otherwise tell user that email/password is invalid.
 
-        User loginUser = userService.getByEmailAndPassword(user.email, user.password);
+        User loginUser = userRepository.getByEmailAndPassword(user.email, user.password);
 
-        Security security = securityService.getByUserId(loginUser.id);
+        Security security = securityRepository.getByUserId(loginUser.id);
         if (security != null)
             return ResponseEntity.ok(security);
 
@@ -43,7 +43,7 @@ public class CredentialsController {
         sec.userId = loginUser.id;
         sec.accessToken = Randomizer.generateInt();
 
-        securityService.save(sec);
+        securityRepository.save(sec);
 
         return ResponseEntity.ok(sec);
     }
@@ -51,6 +51,6 @@ public class CredentialsController {
     @DeleteMapping("/logout/{securityTokenId}")
     @Transactional
     public void doLogout(@PathVariable Integer securityTokenId) {
-        securityService.deleteById(securityTokenId);
+        securityRepository.deleteById(securityTokenId);
     }
 }

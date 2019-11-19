@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Service
-public class SecurityService {
+public class SecurityRepository {
 
     @Autowired
     private EntityManager entityManager;

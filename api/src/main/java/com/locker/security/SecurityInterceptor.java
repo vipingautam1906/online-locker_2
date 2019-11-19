@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
-    private SecurityService securityService;
+    private SecurityRepository securityRepository;
 
     @Override
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
@@ -33,7 +33,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
             /* fetch from db that actual object.*/
 
-            Security security = securityService.findByAccessToken(Integer.valueOf(accessToken));
+            Security security = securityRepository.findByAccessToken(Integer.valueOf(accessToken));
             CurrentRequestUser.securedUser = security;
         }
 

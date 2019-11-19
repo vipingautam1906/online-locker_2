@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 @Service
-public class UserService {
+public class UserRepository {
 
     @Autowired
     private EntityManager entityManager;

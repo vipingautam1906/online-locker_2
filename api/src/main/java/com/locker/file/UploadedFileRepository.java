@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UploadedFileService {
+public class UploadedFileRepository {
 
     @Autowired
     private EntityManager entityManager;

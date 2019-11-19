@@ -22,7 +22,7 @@ import java.util.List;
 public class FileController {
 
     @Autowired
-    private UploadedFileService uploadedFileService;
+    private UploadedFileRepository uploadedFileRepository;
 
     @Autowired
     private FileSystemService fileSystemService;
@@ -30,7 +30,7 @@ public class FileController {
     @GetMapping
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<UploadedFile> getAllUploadedFiles() {
-        return uploadedFileService.getAll(CurrentRequestUser.securedUser.userId);
+        return uploadedFileRepository.getAll(CurrentRequestUser.securedUser.userId);
     }
 
     @PostMapping("/upload")
@@ -49,7 +49,7 @@ public class FileController {
         up.relativePath = storedFilePath.toAbsolutePath().toString();
         up.fileName = storedFilePath.getFileName().toString();
 
-        uploadedFileService.save(up);
+        uploadedFileRepository.save(up);
 
         return up;
     }
@@ -58,7 +58,7 @@ public class FileController {
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public ResponseEntity<Resource> download(@PathVariable Integer fileId, HttpServletRequest request) {
 
-        UploadedFile fileDBObject = uploadedFileService
+        UploadedFile fileDBObject = uploadedFileRepository
                 .getByIdAndUserId(fileId, CurrentRequestUser.securedUser.userId);
 
         Resource resource = fileSystemService.loadFileAsResource(fileDBObject.fileName);
@@ -85,11 +85,11 @@ public class FileController {
     @Transactional
     public void remove(@PathVariable Integer fileId) {
 
-        UploadedFile fileDBObject = uploadedFileService
+        UploadedFile fileDBObject = uploadedFileRepository
                 .getByIdAndUserId(fileId, CurrentRequestUser.securedUser.userId);
 
         fileSystemService.removeFileAsResource(fileDBObject.fileName);
 
-        uploadedFileService.deleteById(fileId);
+        uploadedFileRepository.deleteById(fileId);
     }
 }
