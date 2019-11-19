@@ -9,6 +9,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * A Crucial Service helps in securing the endpoints before they actually hit.
+ * this class extends {@link HandlerInterceptorAdapter } class which has
+ * several methods.
+ * we have Override preHandle() method here, and checks if the path of request
+ * starts with /secured. if yes then check for the access token in that.
+ * and do authorization there.
+ */
 @Service
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
@@ -18,12 +26,13 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
     @Override
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
+                             HttpServletResponse response,
+                             Object handler) throws Exception {
 
         // if address starts from /secured. only then check for access tokens.
         // otherwise user is accessing a public url. no problem.
-        // so if secured. then set the user context for this request. in Secured class.
-        // checkForSecurity in the request
+        // so if secured. then set the user context for this request. in
+        // Secured class. checkForSecurity in the request
 
         if (request.getServletPath().startsWith("/secured")) {
             String accessToken = request.getHeader("AccessToken");
@@ -33,7 +42,8 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
             /* fetch from db that actual object.*/
 
-            Security security = securityRepository.findByAccessToken(Integer.valueOf(accessToken));
+            Security security = securityRepository.findByAccessToken(
+                    Integer.valueOf(accessToken));
             CurrentRequestUser.securedUser = security;
         }
 

@@ -1,5 +1,8 @@
 package com.locker.user.entities;
 
+/**
+ * Database app_user Entity class
+ */
 public class User {
 
     public Integer id;

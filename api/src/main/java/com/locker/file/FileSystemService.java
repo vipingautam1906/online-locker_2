@@ -11,6 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * A fileSystem manipulator class. this class takes a spring multipart file
+ * and persist that in server's temp folder.
+ * It loads a file based on its file name.
+ * and lastly it removes a file too based on its name.
+ */
 @Service
 public class FileSystemService {
 
@@ -23,7 +29,8 @@ public class FileSystemService {
 
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
-            storedFilePath = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            storedFilePath = Paths.get(UPLOADED_FOLDER + file
+                    .getOriginalFilename());
             Files.write(storedFilePath, bytes);
 
         } catch (IOException e) {
@@ -33,8 +40,8 @@ public class FileSystemService {
     }
 
     public Resource loadFileAsResource(String fileName) {
-        this.fileStorageLocation = Paths.get(UPLOADED_FOLDER).toAbsolutePath().normalize();
-
+        this.fileStorageLocation = Paths.get(UPLOADED_FOLDER).toAbsolutePath()
+                .normalize();
         try {
 
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
@@ -50,15 +57,16 @@ public class FileSystemService {
     }
 
     public void removeFileAsResource(String fileName) {
-        this.fileStorageLocation = Paths.get(UPLOADED_FOLDER).toAbsolutePath().normalize();
-
+        this.fileStorageLocation = Paths.get(UPLOADED_FOLDER).toAbsolutePath()
+                .normalize();
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
             if (resource.exists()) {
                 boolean status = resource.getFile().delete();
                 if (!status)
-                    throw new RuntimeException("File " + fileName + " could not be removed");
+                    throw new RuntimeException("File " + fileName +
+                            " could not be removed");
             } else {
                 throw new RuntimeException("File not found " + fileName);
             }

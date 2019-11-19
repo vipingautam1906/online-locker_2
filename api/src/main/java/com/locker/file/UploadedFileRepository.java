@@ -2,14 +2,17 @@ package com.locker.file;
 
 import com.locker.file.entity.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+/**
+ * A uploaded_file database repository class. helps in manipulating uploaded_file table.
+ */
+@Repository
 public class UploadedFileRepository {
 
     @Autowired
@@ -17,11 +20,12 @@ public class UploadedFileRepository {
 
     public List<UploadedFile> getAll(Integer userId) {
 
-        Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE user_id = ?")
+        Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file" +
+                " WHERE user_id = ?")
                 .setParameter(1, userId);
         List<Object[]> uploadedFilesRes = q.getResultList();
 
-        List<UploadedFile> allUploadedFiles = new ArrayList<UploadedFile>(); // add all db users in this list.
+        List<UploadedFile> allUploadedFiles = new ArrayList<UploadedFile>();
         for (Object[] uf : uploadedFilesRes) {
             UploadedFile u = new UploadedFile(uf);
             allUploadedFiles.add(u);
@@ -31,7 +35,8 @@ public class UploadedFileRepository {
     }
 
     public void save(UploadedFile up) {
-        entityManager.createNativeQuery("INSERT INTO uploaded_file (id, user_id, file_name, relative_path) VALUES (?, ?, ?, ?)")
+        entityManager.createNativeQuery("INSERT INTO uploaded_file" +
+                " (id, user_id, file_name, relative_path) VALUES (?, ?, ?, ?)")
                 .setParameter(1, up.id)
                 .setParameter(2, up.userId)
                 .setParameter(3, up.fileName)
@@ -40,13 +45,15 @@ public class UploadedFileRepository {
     }
 
     public UploadedFile getByIdAndUserId(Integer fileId, Integer userId) {
-        Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file WHERE id = ? AND user_id = ?")
+        Query q = entityManager.createNativeQuery("SELECT * FROM uploaded_file" +
+                " WHERE id = ? AND user_id = ?")
                 .setParameter(1, fileId)
                 .setParameter(2, userId);
         List<Object[]> uploadedFilesRes = q.getResultList();
 
         if (uploadedFilesRes.isEmpty())
-            throw new RuntimeException("Uploaded file Id " + fileId + " doesn't exists for this user");
+            throw new RuntimeException("Uploaded file Id " + fileId +
+                    " doesn't exists for this user");
 
         return new UploadedFile(uploadedFilesRes.get(0));
     }

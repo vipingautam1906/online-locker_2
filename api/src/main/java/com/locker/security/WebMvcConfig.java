@@ -7,6 +7,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * Spring Interceptor registering class. we have used that to register our Security
+ * Interceptor here.
+ * our interceptor will be injected in this yourInjectedInterceptor field
+ * and we will put that in register via addInterceptor method
+ */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
