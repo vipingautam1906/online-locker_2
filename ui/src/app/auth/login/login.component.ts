@@ -11,21 +11,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
-
 	constructor(
 		private authService: AuthenticationService,
 		private sessionService: SessionService,
 		private router: Router
-	) {
-	}
-
+	) {}
 	ngOnInit() {
 		this.loginForm = new FormGroup({
-			email: new FormControl('shivam@gmail.com'),
-			password: new FormControl('whatsnew'),
+			email: new FormControl(''),
+			password: new FormControl(''),
 		});
 	}
-
 	doLogin() {
 		const val = this.loginForm.value;
 		this.authService.doLogin(val.email, val.password).subscribe((e) => {
@@ -36,7 +32,6 @@ export class LoginComponent implements OnInit {
 
 		});
 	}
-
 	go(url: string) {
 		this.router.navigate([url]);
 	}

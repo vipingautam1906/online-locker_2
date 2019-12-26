@@ -11,22 +11,17 @@ import {ToastService} from '../../../toast.service';
     styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-
     user: User = new User();
     userForm: FormGroup;
-
     constructor(
         private router: Router,
         private userService: UserService,
         private fb: FormBuilder,
         private toastService: ToastService
-    ) {
-    }
-
+    ) {}
     ngOnInit() {
         this.loadForm();
     }
-
     private loadForm() {
         this.userForm = this.fb.group({
             email: new FormControl(),
@@ -35,12 +30,9 @@ export class UserFormComponent implements OnInit {
             lastName: new FormControl()
         });
     }
-
     saveUser() {
         const tempUser = new User(this.userForm.value);
         this.userService.save(tempUser).subscribe(r => {
             this.toastService.success('User has been created successfully');
             this.router.navigate(['login']);
-        });
-    }
-}
+        });}}

@@ -6,9 +6,19 @@
 </div>
 <div class="mynavbar">
 	<div *ngIf="!isAuthenticated">
-		<button   type="button" class="btn btn-secondary" (click)="go('login')">Login</button>
+
+        <div class="navbar-brand">
+            <a class="navbar-item">
+                <img src="assets/login.png" width="50px">
+            </a>
+        </div>
+        <button  type="button" class="btn btn-secondary" (click)="go('users/add')">Registration Here</button>
 		<button  type="button" class="btn btn-secondary" (click)="go('users')">Users List</button>
-		<button  type="button" class="btn btn-secondary" (click)="go('users/add')">New User Registration</button>
+        <button   type="button" class="btn btn-secondary pull-right" (click)="go('login')">Login</button>
+
+
 	</div>
 </div>
 <hr>
+
+

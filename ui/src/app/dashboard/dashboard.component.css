@@ -16,3 +16,8 @@ button{
     font-size: 18px;
     color: white;
 }
+
+.container{
+    background-image: url("user.png");
+    background-repeat: no-repeat;
+}

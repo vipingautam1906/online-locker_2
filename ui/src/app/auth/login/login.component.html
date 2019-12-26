@@ -1,4 +1,8 @@
-
+<div class="navbar-brand">
+    <a class="navbar-item">
+        <img src="assets/lock.jpg" width="650px">
+    </a>
+</div>
 <div class="ui-g">
     <div class="ui-g-6">
         <form [formGroup]="loginForm" *ngIf="loginForm">
@@ -20,6 +24,7 @@
                            type="password"
                            placeholder="Enter Password"
 						   formControlName="password"
+                           minlength="8"
 						   required />
                 </div>
                 <div class="ui-g-12">
@@ -33,4 +38,6 @@
         </form>
     </div>
 </div>
+
+
 

@@ -1,3 +1,8 @@
+<div class="navbar-brand">
+    <a class="navbar-item">
+        <img src="assets/lock.jpg" width="800px">
+    </a>
+</div>
 <form [formGroup]="userForm" *ngIf="!!userForm">
     <div class="ui-lg-7 ui-md-5 ui-g-7 ui-sm-12 form-cont">
         <div class="ui-g-4">
@@ -8,19 +13,22 @@
                    type="text"
                    formControlName="firstName"
 				   placeholder="First Name"
-				   required
+                   minlength="3"
+                   required
 				   pattern="[A-Za-z]+" />
         </div>
         <div class="ui-g-4">
-            <label>First Name</label>
+            <label>Last Name</label>
         </div>
         <div class="ui-g-8">
             <input pInputText
                    type="text"
                    formControlName="lastName"
 				   placeholder="Last Name"
-				   required
+                   minlength="3"
+                   required
 				   pattern="[A-Za-z]+"/>
+
         </div>
         <div class="ui-g-4">
             <label>Email</label>
@@ -41,6 +49,7 @@
                    type="password"
                    formControlName="password"
 				   placeholder="Enter Password"
+                   minlength="8"
 				   required/>
         </div>
 

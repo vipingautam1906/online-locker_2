@@ -9,22 +9,17 @@ import {ToastService} from "../toast.service";
 	styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
 	uploadedFiles: UploadedFile[] = [];
     fileUploading: boolean = false;
-
 	constructor(
 		private fileService: FileService,
         private toastService: ToastService) { }
-
 	ngOnInit() {
 		this.fileService.listAll().subscribe((r) => {
 			this.uploadedFiles = r.map(e => new UploadedFile(e));
 		});
     }
-
     downloadFile(fileId: string, filename: string) {
-
         this.fileService.download(fileId).subscribe(res => {
             var url = window.URL.createObjectURL(res);
             var a = document.createElement('a');

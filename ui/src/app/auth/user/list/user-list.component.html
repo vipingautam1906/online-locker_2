@@ -1,7 +1,12 @@
+<div class="navbar-brand">
+    <a class="navbar-item">
+        <img src="assets/lock.jpg" width="800px">
+    </a>
+</div>
 <div class="ui-g-12">
-    <div class="ui-g-7" *ngFor="let user of users; let idx = index">
+    <div class="ui-g-8" *ngFor="let user of users; let idx = index">
         <div class="ui-g user-list-item">
-            <div class="ui-g-4">{{ idx+1 }}.</div>
+            <div class="ui-g-2">{{ idx+1 }}.</div>
             <div class="ui-g-4">{{ user.email }}</div>
             <div class="ui-g-4">{{ user.fullName }}</div>
         </div>
