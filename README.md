@@ -1,5 +1,4 @@
-
-so this application is spring-boot angular based.
+The application is spring-boot angular based.
 
 first run postgres docker instance on port 5432 by command.
 
@@ -56,7 +55,7 @@ Naming conventions and project architecture used in this project.
         uploading/viewing of files
     - decision folder contains the top menubar and secured component loader for the application. 
     
-    -    
+ 
     
 
 
